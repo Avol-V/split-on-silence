@@ -1,0 +1,23 @@
+{
+  "name": "split-on-silence",
+  "version": "1.0.0",
+  "description": "Splits audio files with silence detection",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avol-V/split-on-silence.git"
+  },
+  "author": "Andrey Volynkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Avol-V/split-on-silence/issues"
+  },
+  "homepage": "https://github.com/Avol-V/split-on-silence#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18"
+  }
+}
