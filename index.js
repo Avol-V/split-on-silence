@@ -19,19 +19,37 @@ async function main()
 	
 	for await ( const path of walk( process.cwd(), pattern ) )
 	{
-		const {
-			silenceSegments,
-			totalDuration,
-		} = await detectSilence( path, duration, noise );
-		
-		if (
-			( silenceSegments.length !== 0 )
-			&& await confirmSplit( path, totalDuration, silenceSegments )
-		)
+		try
 		{
-			const outputLines = await splitOnSilence( path, silenceSegments );
+			const {
+				silenceSegments,
+				totalDuration,
+			} = await detectSilence( path, duration, noise );
 			
-			console.log( outputLines.join( '\n' ) );
+			if (
+				( silenceSegments.length !== 0 )
+				&& await confirmSplit( path, totalDuration, silenceSegments )
+			)
+			{
+				const outputLines = await splitOnSilence( path, silenceSegments );
+				
+				console.log( outputLines.join( '\n' ) );
+			}
+		}
+		catch ( error )
+		{
+			if (
+				( typeof error === 'object' )
+				&& ( error !== null )
+				&& ( 'stderr' in error )
+			)
+			{
+				console.error( error.stderr );
+			}
+			else
+			{
+				console.error( 'Can\'t process file', path );
+			}
 		}
 	}
 }
